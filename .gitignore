@@ -1,0 +1,33 @@
+# Системные файлы IDE
+.idea/
+.vscode/
+.DS_Store
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Билд
+dist/
+build/
+
+# Кэш Vite
+.vite/
+vite.config.ts.timestamp-*
+
+# Переменные окружения
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+# Тесты и отчёты
+coverage/
+*.log
+
+# Разное
+*.local
