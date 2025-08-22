@@ -86,11 +86,11 @@ function App() {
     const [weatherData, setWeatherData] = useState<WeatherApiResponse | null>(null);
     const [city, setCity] = useState<string>("london");
     const [forecast, setForecast] = useState<ForecastItem[]>([]);
-    const [searchInput, setSearchInput] = useState("");
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false)
+    const [searchInput, setSearchInput] = useState<string>("");
+    const [error, setError] = useState<string | null>('');
+    const [loading, setLoading] = useState<boolean>(false)
 
-    const fetchWeatherData = async (cityName) => {
+    const fetchWeatherData = async (cityName: string) => {
         setCity(cityName);
         try {
             setLoading(true)
@@ -104,7 +104,7 @@ function App() {
             const foreCastresponse = await fetch(
                 `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
             );
-            const forecastdata = await foreCastresponse.json();
+            const forecastdata: ForecastApiResponse = await foreCastresponse.json();
 
             const dailyForecast = forecastdata.list.filter(
                 (item, index) => index % 8 === 0
@@ -122,7 +122,7 @@ function App() {
         fetchWeatherData(city);
     }, [city]);
 
-    function handleSearch(e) {
+    function handleSearch(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         fetchWeatherData(searchInput);
     }
