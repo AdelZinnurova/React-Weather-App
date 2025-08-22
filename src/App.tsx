@@ -1,6 +1,7 @@
 import './App.css'
 import {useEffect, useState} from "react";
 import {CurrentTime} from "./CurrentTime.tsx";
+import {CurrentDate} from "./CurrentDate.tsx";
 
 type WeatherApiResponse = {
     "coord": {
@@ -145,6 +146,7 @@ function App() {
                 </button>
             </form>
             <CurrentTime timezoneOffsetSec={weatherData?.timezone}/>
+            <CurrentDate dt={weatherData?.dt ?? 0} timezone={weatherData?.timezone ?? 0} />
             {error && <p className="error">{error}</p>}
 
             {weatherData && weatherData.main && weatherData.weather && (
