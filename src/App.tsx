@@ -1,5 +1,6 @@
 import './App.css'
 import {useEffect, useState} from "react";
+import {CurrentTime} from "./CurrentTime.tsx";
 
 type WeatherApiResponse = {
     "coord": {
@@ -102,7 +103,7 @@ function App() {
             console.log(data);
 
             const foreCastresponse = await fetch(
-                `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
+                `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${API_KEY}&units=metric`
             );
             const forecastdata: ForecastApiResponse = await foreCastresponse.json();
 
@@ -143,6 +144,7 @@ function App() {
                     Search
                 </button>
             </form>
+            <CurrentTime timezoneOffsetSec={weatherData?.timezone}/>
             {error && <p className="error">{error}</p>}
 
             {weatherData && weatherData.main && weatherData.weather && (
