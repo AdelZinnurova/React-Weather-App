@@ -27,18 +27,73 @@ body {
 
 .wrapper {
     background: rgba(255, 255, 255, 0.2);
-    border-radius: 1.5rem;
+    border-radius: 1rem;
     padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 500px;
 }
 
 .header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.city-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    gap: 1rem;
+}
+
+.weather-details-temp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.Humidity,
+.Wind,
+.Sunrise,
+.Sunset{
+    display: flex;
+    gap: 0.2rem;
+}
+
+.weather-details-other {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem 0.5rem;
+}
+
+.other-description {
+    justify-items: center;
+    align-items: center;
+}
+
+.weather-details-icon {
+    max-width: 30px;
+    max-height: 30px;
+}
+
+.weather-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.city-details {
     text-align: center;
-    padding: 0.5rem;
+    padding: 1rem;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: rgba(245, 245, 245, 0.18);
@@ -46,26 +101,29 @@ body {
 
 .city {
     font-size: 1.5rem;
-    /*font-weight: normal;*/
     margin-bottom: 0.5rem;
 }
 
 .time {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 
-.temperature-wrapper {
-    /*font-size: 64px;*/
-    /*font-weight: 700;*/
-    text-align: center;
+.sunrise-sunset {
+    display: flex;
 }
 
 .temperature {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: bold;
     display: inline;
 }
+
+
+.temperature-wrapper {
+    text-align: center;
+}
+
 
 .condition {
     color: rgba(239, 62, 142, 0.67);
@@ -73,13 +131,6 @@ body {
 
 }
 
-.weather-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: center;
-    /*align-items: center;*/
-}
 
 .humidity-wind {
     display: flex;
@@ -90,25 +141,16 @@ body {
     color: #686666;
 }
 
-.weather-details-icon {
-    max-width: 22px;
-    max-height: 22px;
-}
-
-.sunrise-sunset {
-    display: flex;
-    justify-content: space-around;
-}
 
 .forecast {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding-top: 2rem;
+    padding-top: 1rem;
 }
 
 .forecast-header {
-    /*font-size: 1.5rem;*/
     font-weight: bold;
     color: #686666;
+    margin-bottom: 1rem;
 }
 
 .forecast-days {
@@ -127,7 +169,6 @@ body {
 
 .forecast-temp,
 .forecast-condition {
-    /*font-size: 0.875rem;*/
 }
 
 .search-form {
@@ -135,11 +176,6 @@ body {
     justify-content: space-between;
     gap: 10px;
     align-items: center;
-    /*padding: 10px;*/
-    /*background-color: rgba(255, 255, 255, 0.3);*/
-    /*border-radius: 1.5rem;*/
-    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
-    /*max-width: 400px;*/
 }
 
 .search-input {

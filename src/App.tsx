@@ -145,89 +145,96 @@ function App() {
                     placeholder="Enter city name"
                     className="search-input"
                 />
-                <button type="submit" className="search-button">
-                    Search
-                </button>
+                <button type="submit" className="search-button">Search</button>
             </form>
+
             {error && <p className="error">{error}</p>}
 
             {weatherData && weatherData.main && weatherData.weather && (
                 <>
-                    <div className='header'>
-                        <p className='city'>{weatherData.name}</p>
-                        <CurrentTime timezoneOffsetSec={weatherData?.timezone}/>
-                        <CurrentDate dt={weatherData?.dt ?? 0} timezone={weatherData?.timezone ?? 0} />
-                        <div className="temperature-wrapper">
-                            <img src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}/>
-                            <p className="temperature">{Math.round(weatherData.main.temp)}°C</p>
+                    <div className="header">
+                        <div className="city-details">
+                            <p className="city">{weatherData.name}</p>
+                            <CurrentTime timezoneOffsetSec={weatherData?.timezone}/>
+                            <CurrentDate dt={weatherData?.dt ?? 0} timezone={weatherData?.timezone ?? 0}/>
                         </div>
-                        <p className="condition">{weatherData.weather[0].description}</p>
-                    </div>
-                    <div className="weather-details">
-                        <div className='humidity-wind'>
-                            <div>
-                                <img className='weather-details-icon' src={Humidity} alt="Humidity"/>
-                                <p>{Math.round(weatherData.main.humidity)}%</p>
-                                <p className='humidity-wind-text'>Humidity</p>
+
+                        <div className="weather-details">
+                            <div className="weather-details-temp">
+                                <p className="temperature">{Math.round(weatherData.main.temp)}°C</p>
+                                <p>Feels Like: {Math.round(weatherData.main.feels_like)}°C</p>
+                                <p className="condition">{weatherData.weather[0].description}</p>
                             </div>
-                            <div>
-                                <img className='weather-details-icon' src={Wind} alt="Wind"/>
-                                <p>{Math.round(weatherData.wind.speed)} mph</p>
-                                <p className='humidity-wind-text'>Wind Speed</p>
-                            </div>
-                        </div>
-                        <div className='sunrise-sunset'>
-                            <div>
-                                <img className='weather-details-icon' src={Sunrise} alt="Sunrise"/>
-                                <p>
-                                    {new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString("en-US", {
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                        hour12: true,
-                                    })}
-                                </p>
-                                <p className='humidity-wind-text'>Sunrise</p>
-                            </div>
-                            <div>
-                                <img className='weather-details-icon' src={Sunset} alt="Sunset"/>
-                                <p>
-                                    {new Date(weatherData.sys.sunset * 1000).toLocaleTimeString("en-US", {
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                        hour12: true,
-                                    })}
-                                </p>
-                                <p className='humidity-wind-text'>Sunset</p>
-                            </div>
-                        </div>
-                    </div>
-                    {forecast.length > 0 && (
-                        <>
-                            <div className="forecast">
-                                <p className="forecast-header">Next Days Forecasts</p>
-                                <div className="forecast-days">
-                                    {forecast.map((day, index) => (
-                                        <div key={index} className="forecast-day">
-                                            <p>
-                                                {new Date(day.dt * 1000).toLocaleDateString("en-US", {
-                                                    weekday: "short",
-                                                })}
-                                            </p>
-                                            <img
-                                                src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
-                                                alt={day.weather[0].description}
-                                            />
-                                            <p>{Math.round(day.main.temp)}°C</p>
-                                        </div>
-                                    ))}
+                            <div className='weather-details-other'>
+                                <div className='Humidity'>
+                                    <img className="weather-details-icon" src={Humidity} alt="Humidity"/>
+                                    <div>
+                                        <p>{Math.round(weatherData.main.humidity)}%</p>
+                                        <p className="humidity-wind-text">Humidity</p>
+                                    </div>
+                                </div>
+                                <div className='Wind'>
+                                    <img className="weather-details-icon" src={Wind} alt="Wind"/>
+                                    <div>
+                                        <p>{Math.round(weatherData.wind.speed)} mph</p>
+                                        <p className="humidity-wind-text">Wind Speed</p>
+                                    </div>
+                                </div>
+                                <div className={ "Sunrise"}>
+                                    <img className="weather-details-icon" src={Sunrise} alt="Sunrise"/>
+                                    <div>
+                                        <p>
+                                            {new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString("en-US", {
+                                                hour: "2-digit",
+                                                minute: "2-digit",
+                                            })}
+                                        </p>
+                                        <p className="humidity-wind-text">Sunrise</p>
+                                    </div>
+                                </div>
+                                <div className={ "Sunset"}>
+                                    <img className="weather-details-icon" src={Sunset} alt="Sunset"/>
+                                    <div>
+                                        <p>
+                                            {new Date(weatherData.sys.sunset * 1000).toLocaleTimeString("en-US", {
+                                                hour: "2-digit",
+                                                minute: "2-digit",
+                                            })}
+                                        </p>
+                                        <p className="humidity-wind-text">Sunset</p>
+                                    </div>
                                 </div>
                             </div>
-                        </>
+                        </div>
+                    </div>
+
+                    {forecast.length > 0 && (
+                        <div className="forecast">
+                            <p className="forecast-header">Next Days Forecasts</p>
+                            <div className="forecast-days">
+                                {forecast.map((day, index) => (
+                                    <div key={index} className="forecast-day">
+                                        <p>
+                                            {new Date(day.dt * 1000).toLocaleDateString("en-US", {
+                                                weekday: "short",
+                                            })}
+                                        </p>
+                                        <img
+                                            src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
+                                            alt={day.weather[0].description}
+                                        />
+                                        <p>{Math.round(day.main.temp)}°C</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     )}
                 </>
             )}
         </div>
-    )
+    );
+
+
 }
 
 export default App
