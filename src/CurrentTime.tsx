@@ -20,8 +20,8 @@ export function CurrentTime({ timezoneOffsetSec }: CurrentTimeProps) {
         hour: "2-digit",
         minute: "2-digit",
         timeZone: "UTC",
-        hour12: false,
+        hour12: true,
     }).format(cityDate);
 
-    return <h2>Время в городе: {timeStr}</h2>;
+    return <h2 className='time'>{timeStr}</h2>;
 }

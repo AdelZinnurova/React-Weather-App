@@ -2,6 +2,10 @@ import './App.css'
 import {useEffect, useState} from "react";
 import {CurrentTime} from "./CurrentTime.tsx";
 import {CurrentDate} from "./CurrentDate.tsx";
+import Humidity from "./assets/humidity.png"
+import Wind from "./assets/wind.png"
+import Sunrise from "./assets/sunrise.png"
+import Sunset from "./assets/sunset.png"
 
 type WeatherApiResponse = {
     "coord": {
@@ -145,31 +149,62 @@ function App() {
                     Search
                 </button>
             </form>
-            <CurrentTime timezoneOffsetSec={weatherData?.timezone}/>
-            <CurrentDate dt={weatherData?.dt ?? 0} timezone={weatherData?.timezone ?? 0} />
             {error && <p className="error">{error}</p>}
 
             {weatherData && weatherData.main && weatherData.weather && (
                 <>
                     <div className='header'>
-                        <h1 className='city'>{weatherData.name}</h1>
-                        <p className="temperature">{weatherData.main.temp}°C</p>
-                        <p className="condition">{weatherData.weather[0].main}</p>
+                        <p className='city'>{weatherData.name}</p>
+                        <CurrentTime timezoneOffsetSec={weatherData?.timezone}/>
+                        <CurrentDate dt={weatherData?.dt ?? 0} timezone={weatherData?.timezone ?? 0} />
+                        <div className="temperature-wrapper">
+                            <img src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}/>
+                            <p className="temperature">{Math.round(weatherData.main.temp)}°C</p>
+                        </div>
+                        <p className="condition">{weatherData.weather[0].description}</p>
                     </div>
                     <div className="weather-details">
-                        <div>
-                            <p>Humidity</p>
-                            <p>{Math.round(weatherData.main.humidity)}%</p>
+                        <div className='humidity-wind'>
+                            <div>
+                                <img className='weather-details-icon' src={Humidity} alt="Humidity"/>
+                                <p>{Math.round(weatherData.main.humidity)}%</p>
+                                <p className='humidity-wind-text'>Humidity</p>
+                            </div>
+                            <div>
+                                <img className='weather-details-icon' src={Wind} alt="Wind"/>
+                                <p>{Math.round(weatherData.wind.speed)} mph</p>
+                                <p className='humidity-wind-text'>Wind Speed</p>
+                            </div>
                         </div>
-                        <div>
-                            <p>Wind Speed</p>
-                            <p>{Math.round(weatherData.wind.speed)} mph</p>
+                        <div className='sunrise-sunset'>
+                            <div>
+                                <img className='weather-details-icon' src={Sunrise} alt="Sunrise"/>
+                                <p>
+                                    {new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString("en-US", {
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        hour12: true,
+                                    })}
+                                </p>
+                                <p className='humidity-wind-text'>Sunrise</p>
+                            </div>
+                            <div>
+                                <img className='weather-details-icon' src={Sunset} alt="Sunset"/>
+                                <p>
+                                    {new Date(weatherData.sys.sunset * 1000).toLocaleTimeString("en-US", {
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        hour12: true,
+                                    })}
+                                </p>
+                                <p className='humidity-wind-text'>Sunset</p>
+                            </div>
                         </div>
                     </div>
                     {forecast.length > 0 && (
                         <>
                             <div className="forecast">
-                                <h2 className="forecast-header">5-Day Forecast</h2>
+                                <p className="forecast-header">Next Days Forecasts</p>
                                 <div className="forecast-days">
                                     {forecast.map((day, index) => (
                                         <div key={index} className="forecast-day">
