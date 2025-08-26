@@ -1,69 +1,31 @@
-# React + TypeScript + Vite
+# Weather App (React + TypeScript)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight weather app built with React and TypeScript: responsive layout, data from OpenWeather. Enter a city — get current weather, humidity/wind, sunrise/sunset, and a forecast.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* City search and display of **current weather** (°C, feels like, description).
+* Local **time and date** for the selected city.
+* **Humidity**, **wind speed**, **sunrise/sunset** shown in the city’s local time.
+* **5‑day forecast** (from the 5‑day/3‑hour API, aggregated per day).
+* Responsive layout (mobile → tablet → desktop).
+* Lightweight **CSS** styling.
+* Plain `fetch` + `useState`/`useEffect`.
 
-## Expanding the ESLint configuration
+## 🧱 Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* **React 18** + **TypeScript**
+* **Vite**
+* API: **OpenWeather** (`/data/2.5/weather`, `/data/2.5/forecast`)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## API
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Two endpoints are used:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+* `GET /data/2.5/weather?q={city}&units=metric&appid={API_KEY}` — current weather
+* `GET /data/2.5/forecast?q={city}&units=metric&appid={API_KEY}` — 5‑day forecast (3‑hour step)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Layout & Responsiveness
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+* Global layout — **CSS Grid**/**Flex**.
+* Breakpoint: `480px` (see `index.css`).
