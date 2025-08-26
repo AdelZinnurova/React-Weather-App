@@ -162,7 +162,7 @@ function App() {
                         <div className="weather-details">
                             <div className="weather-details-temp">
                                 <p className="temperature">{Math.round(weatherData.main.temp)}°C</p>
-                                <p>Feels Like: {Math.round(weatherData.main.feels_like)}°C</p>
+                                <p className="feels-like">feels like: {Math.round(weatherData.main.feels_like)}°C</p>
                                 <p className="condition">{weatherData.weather[0].description}</p>
                             </div>
                             <div className='weather-details-other'>
