@@ -12,7 +12,7 @@ A lightweight weather app built with React and TypeScript: responsive layout, da
 * Lightweight **CSS** styling.
 * Plain `fetch` + `useState`/`useEffect`.
 
-## 🧱 Tech Stack
+## Tech Stack
 
 * **React 18** + **TypeScript**
 * **Vite**
