@@ -90,7 +90,7 @@ function App() {
     const API_KEY = 'e2b8e81c26191504257bd05c2e05b7aa'
 
     const [weatherData, setWeatherData] = useState<WeatherApiResponse | null>(null);
-    const [city, setCity] = useState<string>("london");
+    const [city, setCity] = useState<string>("Moscow");
     const [forecast, setForecast] = useState<ForecastItem[]>([]);
     const [searchInput, setSearchInput] = useState<string>("");
     const [error, setError] = useState<string | null>('');
@@ -131,6 +131,7 @@ function App() {
     function handleSearch(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         fetchWeatherData(searchInput);
+        setSearchInput("");
     }
 
     if (loading) return <div className="wrapper">Loading...</div>
