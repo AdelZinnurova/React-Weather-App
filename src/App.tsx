@@ -113,7 +113,7 @@ function App() {
             const forecastdata: ForecastApiResponse = await foreCastresponse.json();
 
             const dailyForecast = forecastdata.list.filter(
-                (item, index) => index % 8 === 0
+                (_item, index) => index % 8 === 0
             );
 
             setForecast(dailyForecast);
