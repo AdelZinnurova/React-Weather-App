@@ -20,8 +20,8 @@ export function CurrentDate({ dt, timezone }: CurrentDateProps) {
 
     return (
         <div>
-            <span>{dayOfWeek}, </span>
-            <span>{formattedDate}</span>
+            <span className='date'>{dayOfWeek}, </span>
+            <span className='date'>{formattedDate}</span>
         </div>
     );
 }
