@@ -90,7 +90,7 @@ function App() {
     const API_KEY = 'e2b8e81c26191504257bd05c2e05b7aa'
 
     const [weatherData, setWeatherData] = useState<WeatherApiResponse | null>(null);
-    const [city, setCity] = useState<string>("Moscow");
+    const [city, setCity] = useState<string>(() => localStorage.getItem("city") || "Moscow");
     const [forecast, setForecast] = useState<ForecastItem[]>([]);
     const [searchInput, setSearchInput] = useState<string>("");
     const [error, setError] = useState<string | null>('');
@@ -127,6 +127,11 @@ function App() {
     useEffect(() => {
         fetchWeatherData(city);
     }, [city]);
+
+    useEffect(() => {
+        localStorage.setItem("city", city);
+    }, [city]);
+
 
     function handleSearch(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -171,14 +176,14 @@ function App() {
                                     <img className="weather-details-icon" src={Humidity} alt="Humidity"/>
                                     <div>
                                         <p>{Math.round(weatherData.main.humidity)}%</p>
-                                        <p className="humidity-wind-text">Humidity</p>
+                                        <p className="humidity-wind-text">humidity</p>
                                     </div>
                                 </div>
                                 <div className='Wind'>
                                     <img className="weather-details-icon" src={Wind} alt="Wind"/>
                                     <div>
-                                        <p>{Math.round(weatherData.wind.speed)} mph</p>
-                                        <p className="humidity-wind-text">Wind Speed</p>
+                                        <p>{Math.round(weatherData.wind.speed)} m/c</p>
+                                        <p className="humidity-wind-text">wind speed</p>
                                     </div>
                                 </div>
                                 <div className={ "Sunrise"}>
@@ -190,7 +195,7 @@ function App() {
                                                 minute: "2-digit",
                                             })}
                                         </p>
-                                        <p className="humidity-wind-text">Sunrise</p>
+                                        <p className="humidity-wind-text">sunrise</p>
                                     </div>
                                 </div>
                                 <div className={ "Sunset"}>
@@ -202,7 +207,7 @@ function App() {
                                                 minute: "2-digit",
                                             })}
                                         </p>
-                                        <p className="humidity-wind-text">Sunset</p>
+                                        <p className="humidity-wind-text">sunset</p>
                                     </div>
                                 </div>
                             </div>
